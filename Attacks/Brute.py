@@ -38,8 +38,11 @@ for i in range(0, 10000):
         Ns.append(N)
         Times.append(Time)
 
+PlottingTime = [Times for _,Times in sorted(zip(Ns,Times))]
+PlottingNs = sorted(Ns)
+
 # plotting the points 
-plt.plot(Ns, Times)
+plt.plot(PlottingNs, PlottingTime)
   
 # naming the x axis
 plt.xlabel('N values')
