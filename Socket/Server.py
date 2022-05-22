@@ -1,10 +1,31 @@
 # first of all import the socket library
-import socket
-import pickle   
+import socket 
 from RSA import *
 
+p=0
+q=0
+e=0
+nBits =128
+# while True:
+#   option = input("Please send : 1-p,q 2-p,q,e 3-n bits 4-auto")
+#   if option == "1" or option == "2" or option == "3":
+#     break
+#   else:
+#     print("invalid choice")
+
+# if option == "1":
+#   p = int(input("P = :"))
+#   q = int(input("Q = :"))
+# elif option == "2":
+#   p = int(input("P = :"))
+#   q = int(input("Q = :"))
+#   e = int(input("E = :"))
+# elif option == "3":
+#   nBits = int(input("N bits = :"))
+
+
 #intialzing RSA
-rsa = RSA(nBits=128)
+rsa = RSA(p=p, q=q, e=e, nBits=nBits)
 n = rsa.p * rsa.q
 nStr = ConvertToStr(n)
 eStr = ConvertToStr(rsa.e)

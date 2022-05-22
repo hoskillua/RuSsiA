@@ -27,9 +27,6 @@ while True:
     print(encryptedList)
     encryptedMsg = "NIGGER".join( [ConvertToStr(c) for c in encryptedList])
     
-    strArray = encryptedMsg.split("NIGGER")
-    encryptedList = [ConvertToInt(c) for c in strArray]
-    msg = rsa.Decrypt(encryptedList)
     print(msg)
     s.send(encryptedMsg.encode())
     
