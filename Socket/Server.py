@@ -4,7 +4,10 @@ import pickle
 from RSA import *
 
 #intialzing RSA
-rsa = RSA(p=101, q=103, e=11)
+rsa = RSA(nBits=128)
+n = rsa.p * rsa.q
+nStr = ConvertToStr(n)
+eStr = ConvertToStr(rsa.e)
 
 # next create a socket object
 s = socket.socket()        
@@ -35,6 +38,9 @@ while True:
   print ('Got connection from', addr )
  
   break
+
+key = nStr + 'NIGGER' + eStr
+c.send(key.encode())
 
 while True:
 

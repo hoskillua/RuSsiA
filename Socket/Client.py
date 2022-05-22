@@ -1,9 +1,11 @@
 # first of all import the socket library
+from lib2to3.pytree import convert
 import socket   
 import pickle         
 from RSA import *
 #intialzing RSA
-rsa = RSA(p=101, q=103, e=11)
+
+
  
 # Create a socket object
 s = socket.socket()        
@@ -13,13 +15,15 @@ port = 22222
  
 # connect to the server on local computer
 s.connect(('127.0.0.1', port))
- 
+keyStr = s.recv(4096).decode()
+key = keyStr.split("NIGGER")
+n = ConvertToInt(key[0])
+e = ConvertToInt(key[1])
+
 while True:
     
-    
-    
     msg = input("Client:")
-    encryptedList = rsa.Encrypt(msg)
+    encryptedList = Encrypt(msg, n, e)
     print(encryptedList)
     encryptedMsg = "NIGGER".join( [ConvertToStr(c) for c in encryptedList])
     

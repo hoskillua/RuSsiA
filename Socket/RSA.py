@@ -138,3 +138,14 @@ class RSA:
         IntM = PowMod(ci, d, self.p * self.q)
         m.append(IntM)
     return m
+
+def Encrypt(m, n, e):
+    strN = ConvertToStr(n)
+    chunks, chunk_size = len(m), max(len(strN) - 1, 1)
+    m = [m[i:i+chunk_size] for i in range(0, chunks, chunk_size)]
+    c = []
+    for mi in m:
+        IntM = ConvertToInt(mi)
+        IntC = PowMod(IntM, e, n)
+        c.append(IntC)
+    return c
