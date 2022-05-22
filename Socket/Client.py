@@ -1,5 +1,9 @@
-# Import socket module
-import socket            
+# first of all import the socket library
+import socket   
+import pickle         
+from RSA import *
+#intialzing RSA
+rsa = RSA(p=101, q=103, e=11)
  
 # Create a socket object
 s = socket.socket()        
@@ -12,13 +16,23 @@ s.connect(('127.0.0.1', port))
  
 while True:
     
-    # receive data from the server and decoding to get the string.
-    print ("response:"+s.recv(1024).decode())
     
-    msg = input("message:")
-    s.send(msg.encode())
+    
+    msg = input("Client:")
+    encryptedList = rsa.Encrypt(msg)
+    print(encryptedList)
+    encryptedMsg = "NIGGER".join( [ConvertToStr(c) for c in encryptedList])
+    
+    strArray = encryptedMsg.split("NIGGER")
+    encryptedList = [ConvertToInt(c) for c in strArray]
+    msg = rsa.Decrypt(encryptedList)
+    print(msg)
+    s.send(encryptedMsg.encode())
     
     if msg == 'end':
         s.close() 
         break
+
+    # receive data from the server and decoding to get the string.
+    print (s.recv(4096).decode())
  

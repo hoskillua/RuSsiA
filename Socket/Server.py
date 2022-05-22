@@ -1,6 +1,11 @@
 # first of all import the socket library
-import socket            
- 
+import socket
+import pickle   
+from RSA import *
+
+#intialzing RSA
+rsa = RSA(p=101, q=103, e=11)
+
 # next create a socket object
 s = socket.socket()        
 print ("Socket successfully created")
@@ -29,19 +34,19 @@ while True:
   c, addr = s.accept()    
   print ('Got connection from', addr )
  
-  # send a thank you message to the client. encoding to send byte type.
-  c.send('Thank you for connecting'.encode())
-  
-  # Breaking once connection closed
   break
 
 while True:
-  msg = ""
 
-  msg = c.recv(1024).decode()
+  msg = c.recv(4096).decode()
+  strArray = msg.split("NIGGER")
+  encryptedList = [ConvertToInt(c) for c in strArray]
+  print(encryptedList)
+  msg = rsa.Decrypt(encryptedList)
+  print("server:"+msg)
   
   if(msg == "end"):
     c.send('Thank you for connecting'.encode())
     c.close()
     break
-  c.send( ('I recieved :' + msg).encode() )
+  c.send( ('Server recieved ' + msg).encode() )
